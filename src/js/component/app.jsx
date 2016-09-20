@@ -1,8 +1,18 @@
 'use strict';
 
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default class App extends React.Component {
+import { increment } from '../action/app'
+import { textChange } from '../action/app'
+
+
+class App extends React.Component {
+
+    componentDidMount(){
+        //なんかの処理
+    }
+
     render() {
         return <div>
             <span>{this.props.fuga}</span>
@@ -16,3 +26,18 @@ export default class App extends React.Component {
         </div>
     }
 }
+
+function mapStateToProps(state) {
+    return state
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+
+        handleChange: (e) => {
+            dispatch(textChange(e.target.value)) },
+        handleClick: () => { dispatch(increment()) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -2,7 +2,7 @@
 
 const initialState = {
     fuga: 'aaaaa',
-    nega: 1
+    nega: 1,
 }
 
 export default function reducer(state = initialState, action) {

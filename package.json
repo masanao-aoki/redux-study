@@ -20,6 +20,7 @@
         "babel-core": "",
         "babel-preset-es2015": "",
         "babel-preset-react": "",
-        "require-dir": ""
+        "require-dir": "",
+        "superagent": ""
     }
 }
