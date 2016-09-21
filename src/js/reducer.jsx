@@ -1,22 +1,14 @@
 'use strict';
 
 const initialState = {
-    fuga: 'aaaaa',
-    nega: 1,
+
 }
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
-        case 'INCREMENT': {
+        case 'AJAX': {
             return {
-                nega: state.nega + 1,
-                fuga: state.fuga
-            }
-        }
-        case 'TEXT': {
-            return {
-                fuga: action.text,
-                nega: state.nega
+                content: action.text,
             }
         }
         default:

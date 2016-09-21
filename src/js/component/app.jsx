@@ -7,34 +7,26 @@ import { increment, textChange, ajaxRequest} from '../action/app'
 class App extends React.Component {
 
     componentDidMount(){
-        console.log(ajaxRequest());
+        this.props.init();
     }
 
     render() {
         return <div>
-            <span>{this.props.fuga}</span>
-            <br />
-            <input type="text" value={this.props.fuga} onChange={this.props.handleChange} />
-            <br />
-            <br />
-            <br />
-            <span>{this.props.nega}</span>
-            <button onClick={ () => this.props.handleClick() }>増加</button>
+            <span>{this.props.cotent}</span>
         </div>
     }
 }
 
 function mapStateToProps(state) {
-    console.log(state);
+    console.log(state)
     return state
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-
-        handleChange: (e) => {
-            dispatch(textChange(e.target.value)) },
-        handleClick: () => { dispatch(increment()) }
+        handleChange: (e) => { dispatch(textChange(e.target.value)) },
+        handleClick: () => { dispatch(increment()) },
+        init: () => { dispatch(ajaxRequest()) }
     }
 }
 
