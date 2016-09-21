@@ -12,20 +12,17 @@ class App extends React.Component {
 
     render() {
         return <div>
-            <span>{this.props.cotent}</span>
+            <span>{this.props.content}</span>
         </div>
     }
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return state
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        handleChange: (e) => { dispatch(textChange(e.target.value)) },
-        handleClick: () => { dispatch(increment()) },
         init: () => { dispatch(ajaxRequest()) }
     }
 }
