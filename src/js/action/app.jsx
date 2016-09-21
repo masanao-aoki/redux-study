@@ -3,19 +3,19 @@
 import request from 'superagent'
 
 export function ajaxRequest() {
+    let resBody;
     request
         .get('https://qiita.com/api/v2/items')
         .end(function(err, res){
-            let resBody = res.body
-            console.log();//ここにparse済みのオブジェクトが入る
+            resBody = res.body
+            return res.body
     });
-
-    console.log(resBody);
 
     return {
         type: 'AJAX',
         cotent: resBody
     }
+
 
 }
 

@@ -2,15 +2,12 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-
-import { increment } from '../action/app'
-import { textChange } from '../action/app'
-
+import { increment, textChange, ajaxRequest} from '../action/app'
 
 class App extends React.Component {
 
     componentDidMount(){
-        //なんかの処理
+        console.log(ajaxRequest());
     }
 
     render() {
@@ -28,6 +25,7 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state);
     return state
 }
 
