@@ -12,7 +12,11 @@ class App extends React.Component {
 
     render() {
         return <div>
-            <span>{this.props.content}</span>
+            <ul>
+                {this.props.content.map(function({title}) {
+                    return <li key={title}>{title}</li>;
+                })}
+            </ul>
         </div>
     }
 }

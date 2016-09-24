@@ -1,7 +1,7 @@
 'use strict';
 
 const initialState = {
-    content: 'aaaaa'
+    content: []
 }
 
 export default function reducer(state = initialState, action) {

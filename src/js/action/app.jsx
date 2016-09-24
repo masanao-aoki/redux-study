@@ -3,18 +3,35 @@
 import request from 'superagent'
 
 export function ajaxRequest() {
-    let p1 = new Promise((resolve, reject) => {
-        //resolve("Success!");
-        reject ("Error!");
-    });
+        return dispatch => {
+            const test = () => {
+            return new Promise((resolve, reject) => {
+                request
+                .get('https://qiita.com/api/v2/items')
+                .end((err, res) => {
+                    resolve(res.body);
+                });
 
-    p1.then((value) => {
-        console.log(value)
-    }, (reason) => {
-        console.log(reason);
-    });
-    return {
-        type: 'AJAX',
-        text: 'あああああ'
-    }
+            });
+        };
+
+        const tests = test();
+        tests.then((result) => {
+            dispatch(returnRequest(result));
+        });
+
+        // request
+        // .get('https://qiita.com/api/v2/items')
+        // .end(function(err, res){
+        //     console.log();
+        // });
+    };
 }
+
+
+export function returnRequest(data) {
+    return {
+            type: 'AJAX',
+            text: data
+        }
+    }
