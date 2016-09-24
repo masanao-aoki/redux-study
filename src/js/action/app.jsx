@@ -2,14 +2,25 @@
 
 import request from 'superagent'
 
-export function ajaxRequest() {
+export function ajaxRequest(searchValue,searchType) {
         return dispatch => {
             const test = () => {
             return new Promise((resolve, reject) => {
+
+                let query = ''
+                if( searchValue && searchType ) {
+                    query = '?query=qiita+'+ searchType + '%3A' + searchValue;
+                }
+
+                let url = 'https://qiita.com/api/v2/items'+ query
                 request
-                .get('https://qiita.com/api/v2/items')
+                .get(url)
                 .end((err, res) => {
-                    resolve(res.body);
+                    if( res ) {
+                        resolve(res.body);
+                    } else {
+                        reject(err);
+                    }
                 });
 
             });
@@ -28,10 +39,23 @@ export function ajaxRequest() {
     };
 }
 
+export function cgangeSelectValue(type) {
+    return {
+        type: 'SELECT',
+        mode: type
+    }
+}
 
 export function returnRequest(data) {
     return {
-            type: 'AJAX',
-            text: data
-        }
+        type: 'AJAX',
+        text: data
     }
+}
+
+export function changeSearchValue(value) {
+    return {
+        type: 'CHANGEVALUE',
+        text: value
+    }
+}
