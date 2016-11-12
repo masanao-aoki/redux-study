@@ -3,7 +3,21 @@
 const initialState = {
     content: [],
     searchValue: '',
+    selectSearchType: [
+        {
+            type: 'tag',
+            label: 'タグで探す'
+        },
+        {
+            type: 'title',
+            label: 'タイトルで探す'
+        }
+    ],
     selectArray: [
+        {
+            type: '',
+            item: '-'
+        },
         {
             type: 'tag',
             item: 'タグで探す'

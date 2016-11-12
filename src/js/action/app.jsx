@@ -15,7 +15,9 @@ export function ajaxRequest(searchValue,searchType) {
                 let url = 'https://qiita.com/api/v2/items'+ query
                 request
                 .get(url)
+                .withCredentials()
                 .end((err, res) => {
+
                     if( res ) {
                         resolve(res.body);
                     } else {
