@@ -8,10 +8,14 @@ var connect = require('gulp-connect');
 //setting
 var settings = require('./gulpfile_settings');
 
-gulp.task('watch', ['html', 'webpack'], function(){
+gulp.task('watch', ['html', 'webpack', 'css', 'img', 'font'], function(){
     gulp.watch(
         settings.watch.html.files,
         ['html']
+    );
+    gulp.watch(
+        settings.watch.css.files,
+        ['css']
     );
     gulp.watch(
         [
@@ -19,6 +23,14 @@ gulp.task('watch', ['html', 'webpack'], function(){
             settings.watch.es6.files
         ],
         ['webpack']
+    );
+    gulp.watch(
+        settings.watch.img.files,
+        ['img']
+    );
+    gulp.watch(
+        settings.watch.font.files,
+        ['font']
     );
 });
 

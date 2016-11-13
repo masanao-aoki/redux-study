@@ -17,11 +17,10 @@ export function ajaxRequest(searchValue,searchType) {
                 .get(url)
                 .withCredentials()
                 .end((err, res) => {
-
-                    if( res ) {
+                    if( res.body.length ) {
                         resolve(res.body);
                     } else {
-                        reject(err);
+                        reject('nnnn');
                     }
                 });
 
@@ -31,6 +30,8 @@ export function ajaxRequest(searchValue,searchType) {
         const tests = test();
         tests.then((result) => {
             dispatch(returnRequest(result));
+        }).catch(function(reason) {
+            console.log('ok');
         });
 
         // request
@@ -41,17 +42,17 @@ export function ajaxRequest(searchValue,searchType) {
     };
 }
 
-export function cgangeSelectValue(type) {
-    return {
-        type: 'SELECT',
-        mode: type
-    }
-}
-
 export function returnRequest(data) {
     return {
         type: 'AJAX',
         text: data
+    }
+}
+
+export function chengeSearchType(type) {
+    return {
+        type: 'RADIO',
+        mode: type
     }
 }
 
