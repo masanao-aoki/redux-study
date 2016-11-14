@@ -27,7 +27,7 @@ export class Detail extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return state.DetailReducer
+    return state.detail
 }
 
 function mapDispatchToProps(dispatch) {

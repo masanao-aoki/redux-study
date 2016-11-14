@@ -5,27 +5,31 @@ import { render } from 'react-dom'
 import thunk from 'redux-thunk'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, Link, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
+import * as reducers from './reducers'
+
+const reducer = combineReducers({
+  ...reducers,
+  routing: routerReducer
+})
 
 import App from './component/app'
-import AppReducer from './reducer/app'
-
-
 import Detail from './component/detail'
-import DetailReducer from './reducer/detail'
 
-const rootReducer = combineReducers({ AppReducer, DetailReducer });
-console.log(rootReducer);
 const store = createStore(
-    rootReducer,
+    reducer,
     applyMiddleware(thunk)
 )
 
+const history = syncHistoryWithStore(hashHistory, store)
 
 render(
     <Provider store={store}>
-    <Router history={hashHistory}>
-        <Route path="/" component={App}/>
+    <Router history={history}>
+        <Route path="/" component={App}>
+        </Route>
         <Route path="/detail/:articleId" component={Detail}/>
     </Router>
     </Provider>,

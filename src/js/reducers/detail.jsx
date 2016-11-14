@@ -4,7 +4,7 @@ const initialState = {
     detailContent: []
 }
 
-export default function reducers(state = initialState, action) {
+export default function detail(state = initialState, action) {
     switch(action.type) {
         case 'AJAX': {
             console.log(action.text)

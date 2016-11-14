@@ -16,7 +16,6 @@ export class App extends React.Component {
     }
 
     render() {
-        console.log(this)
         return (
             <div>
                 <div className="searchform">
@@ -75,7 +74,8 @@ export class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return state.AppReducer
+    console.log(state);
+    return state.app
 }
 
 function mapDispatchToProps(dispatch) {

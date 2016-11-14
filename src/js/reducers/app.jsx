@@ -16,7 +16,7 @@ const initialState = {
     ]
 }
 
-export default function reducer(state = initialState, action) {
+export default function list(state = initialState, action) {
     switch(action.type) {
         case 'CHANGEVALUE': {
             return Object.assign({}, state, {
