@@ -2,9 +2,41 @@
 
 import request from 'superagent'
 
+export function ajaxArticleRequest(articleId) {
+        return dispatch => {
+            const aricleDetail = () => {
+            return new Promise((resolve, reject) => {
+
+                // console.log(articleId)
+                let url = 'http://qiita.com/api/v2/items/'+ articleId
+                // console.log(url)
+                request
+                .get(url)
+                .withCredentials()
+                .end((err, res) => {
+                    if( res.body ) {
+                        resolve(res.body);
+                    } else {
+                        reject('nnnn');
+                    }
+                });
+
+            });
+        };
+
+        const aricleDetails = aricleDetail();
+        aricleDetails.then((result) => {
+            dispatch(returnArticleRequest(result));
+        }).catch(function(reason) {
+            // console.log('ok');
+        });
+
+    };
+}
+
 export function ajaxRequest(searchValue,searchType) {
         return dispatch => {
-            const test = () => {
+            const aricleList = () => {
             return new Promise((resolve, reject) => {
 
                 let query = ''
@@ -27,19 +59,22 @@ export function ajaxRequest(searchValue,searchType) {
             });
         };
 
-        const tests = test();
-        tests.then((result) => {
+        const aricleLists = aricleList();
+        aricleLists.then((result) => {
             dispatch(returnRequest(result));
         }).catch(function(reason) {
-            console.log('ok');
+            // console.log('ok');
         });
 
-        // request
-        // .get('https://qiita.com/api/v2/items')
-        // .end(function(err, res){
-        //     console.log();
-        // });
     };
+}
+
+export function returnArticleRequest(data) {
+    // console.log(data)
+    return {
+        type: 'DETAIL',
+        text: data
+    }
 }
 
 export function returnRequest(data) {

@@ -4,10 +4,9 @@ const initialState = {
     detailContent: []
 }
 
-export default function detail(state = initialState, action) {
+export default function article(state = initialState, action) {
     switch(action.type) {
-        case 'AJAX': {
-            console.log(action.text)
+        case 'DETAIL': {
             return Object.assign({}, state, {
                 detailContent: action.text,
                 })

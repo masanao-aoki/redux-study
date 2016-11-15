@@ -1,3 +1,3 @@
 'use strict';
-export app from './app'
-export detail from './detail'
+export home from './home'
+export article from './article'
