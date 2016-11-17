@@ -77,6 +77,7 @@ export function returnArticleRequest(data) {
     }
 }
 
+
 export function returnRequest(data) {
     return {
         type: 'AJAX',

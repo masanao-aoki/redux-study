@@ -43,6 +43,7 @@ render(
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={Home}/>
+                <Route path="search/:type" component={Home}/>
                 <Route path="article/:id" component={Article}/>
             </Route>
         </Router>

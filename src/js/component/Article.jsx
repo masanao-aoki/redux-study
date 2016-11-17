@@ -2,13 +2,17 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { ajaxArticleRequest } from '../action/action'
+import { ajaxArticleRequest, returnArticleRequest } from '../action/action'
 
 
 export class Article extends React.Component {
 
+    componentWillMount(){
+        this.props.init();
+    }
+
     componentDidMount(){
-        this.props.init(this.props.params.id);
+        this.props.contentRequest(this.props.params.id);
     }
 
 
@@ -31,7 +35,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        init: (articleId) => { dispatch(ajaxArticleRequest(articleId)) }
+        init: () => { dispatch(returnArticleRequest('')) },
+        contentRequest: (articleId) => { dispatch(ajaxArticleRequest(articleId)) }
     }
 }
 

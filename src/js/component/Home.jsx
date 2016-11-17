@@ -11,6 +11,7 @@ import {Link} from 'react-router'
 export class Home extends React.Component {
 
     componentDidMount(){
+        console.log(this.props);
         this.props.init();
     }
 
@@ -28,7 +29,7 @@ export class Home extends React.Component {
                                 <li className={radioGroupItemClass} key={type}>
                                     <input type="radio"
                                         id={type}
-                                        name="typeRadio"
+                                        name="type"
                                         value={type}
                                         onChange={(e)=> this.props.handleTypeClick(e.target.value)}
                                         checked={this.props.selectSearchTypeValue === type}
@@ -39,7 +40,13 @@ export class Home extends React.Component {
                         })}
                     </ul>
                     <input className='searchform-input' type="text" placeholder="記事タイトルから検索" value={this.props.searchValue} onChange={(e)=> this.props.handleChange(e.target.value)}/>
-                    <button className='searchform-submit' onClick={() => this.props.handleClick(this.props.searchValue,this.props.selectSearchTypeValue)}>検索</button>
+                    {(() => {
+                        if (this.props.searchValue)
+                            return <Link to={{ pathname: '/search/' + this.props.selectSearchTypeValue, query: { value: this.props.searchValue } }} className='searchform-submit'>
+                            </Link>;
+                        else
+                        return <span className='searchform-submit searchform-submit-disable'></span>;
+                    })()}
                 </div>
                 <div className="article">
                     {this.props.content.map(({title,tags,id,created_at,user})=> {
