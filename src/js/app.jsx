@@ -15,9 +15,9 @@ import * as reducers from './reducers'
 
 
 
-import App from './component/App'
-import Home from './component/Home'
-import Article from './component/Article'
+import App from './container/App'
+import Home from './container/Home'
+import Article from './container/Article'
 
 const reducer = combineReducers({
   ...reducers,

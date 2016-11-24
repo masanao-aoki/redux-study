@@ -6,13 +6,15 @@ import { ajaxRequest, changeSearchValue, chengeSearchType } from '../action/acti
 import moment from 'moment'
 import classNames from 'classnames'
 import {Link} from 'react-router'
-
+import List from './List'
 
 export class Home extends React.Component {
 
     componentDidMount(){
-        console.log(this.props);
-        this.props.init();
+        if(this.props.params.type && this.props.location.query.value) {
+            this.props.handleChange(this.props.location.query.value);
+            this.props.handleTypeClick(this.props.params.type);
+        }
     }
 
     render() {
@@ -42,38 +44,16 @@ export class Home extends React.Component {
                     <input className='searchform-input' type="text" placeholder="記事タイトルから検索" value={this.props.searchValue} onChange={(e)=> this.props.handleChange(e.target.value)}/>
                     {(() => {
                         if (this.props.searchValue)
-                            return <Link to={{ pathname: '/search/' + this.props.selectSearchTypeValue, query: { value: this.props.searchValue } }} className='searchform-submit'>
+                            return <Link to={{ pathname: '/search/' + this.props.selectSearchTypeValue, query: { value: this.props.searchValue } }} className='searchform-submit disa'>
                             </Link>;
                         else
-                        return <span className='searchform-submit searchform-submit-disable'></span>;
+                        return <span className='searchform-submit'></span>;
                     })()}
                 </div>
-                <div className="article">
-                    {this.props.content.map(({title,tags,id,created_at,user})=> {
-                            const articleUrl = '/detail/'+id;
-                            const createdDate = moment(created_at).format("YYYY/MM/DD");
-                            const userData = user.name ? user.name : user.id;
-                            return <article className="article-item" key={id}>
-                            <Link to={`/article/${id}`}>
-                            <div className='arictle-item-head'>
-                                <h2 className="article-item-title">
-                                    {title}
-                                </h2>
-                                <ul className="article-item-tag-group">
-                                    {tags.map(({name})=>{
-                                        const tagCurrent = classNames(
-                                            { 'article-item-tag-group-item-active': this.props.searchValue.toLowerCase() === name.toLowerCase() && this.props.selectSearchTypeValue === 'tag' }
-                                        );
-                                        return <li className={tagCurrent} key={name}>{name}</li>
-                                    })}
-                                </ul>
-                            </div>
-                            <time className="article-item-time" dateTime={created_at}>{createdDate}</time>
-                            <p className="article-item-user">{userData}</p>
-                            </Link>
-                            </article>
-                    })}
-                </div>
+                <List
+                    selectSearchTypeValue={this.props.params.type}
+                    searchValue={this.props.location.query.value}
+                />
             </div>
         )
     }
@@ -85,10 +65,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        handleClick: (searchVlue, selectType) => { dispatch(ajaxRequest(searchVlue, selectType)) },
         handleChange: (searchVlue) => { dispatch(changeSearchValue(searchVlue)) },
-        handleTypeClick: (searchType) => { dispatch(chengeSearchType(searchType)) },
-        init: () => { dispatch(ajaxRequest()) }
+        handleTypeClick: (searchType) => { dispatch(chengeSearchType(searchType)) }
     }
 }
 
