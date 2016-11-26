@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { ajaxRequest } from '../action/action'
+import { ajaxRequest,chengePageNum } from '../action/action'
 import moment from 'moment'
 import classNames from 'classnames'
 import {Link} from 'react-router'
@@ -12,6 +12,7 @@ export class List extends React.Component {
     componentWillReceiveProps(nextProps) {
         if(nextProps.searchValue != this.props.searchValue || nextProps.selectSearchTypeValue != this.props.selectSearchTypeValue){
             this.props.ajaxRequest(nextProps.searchValue,nextProps.selectSearchTypeValue);
+            this.props.handlePageNum(1);
         }
     }
 
@@ -63,6 +64,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ajaxRequest: (searchVlue, selectType) => { dispatch(ajaxRequest(searchVlue, selectType)) },
+        handlePageNum: (pageNum) => { dispatch(chengePageNum(pageNum)) },
         init: () => { dispatch(ajaxRequest()) }
     }
 }

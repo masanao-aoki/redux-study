@@ -77,6 +77,12 @@ export function returnArticleRequest(data) {
     }
 }
 
+export function chengePageNum(num) {
+    return {
+        type: 'PAGE',
+        num: Number(num)
+    }
+}
 
 export function returnRequest(data) {
     return {

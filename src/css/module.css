@@ -1,16 +1,48 @@
 @charset "UTF-8";
 
 /***************************************************
+	header
+***************************************************/
+
+.header {
+
+	.header-title {
+		text-align: center;
+		font-size: 2.4rem;
+		a {
+			position: relative;
+			padding: 0 0 0 4.5rem;
+			color: #0070cb;
+			.header-balloon {
+				display: block;
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 4rem;
+				height: 4rem;
+				padding: 1.3rem 0 0;
+				border-radius: 50%;
+				color: #fff;
+				font-size: 1.4rem;
+				background-color: #0070cb;
+				box-sizing: border-box;
+				transform: translate(0,-50%);
+			}
+		}
+	}
+}
+
+/***************************************************
 	searchform
 ***************************************************/
 .searchform {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin: 2rem 0;
+	margin: 0 0 2rem;
 	padding: 2rem 2rem;
-	border: .1rem solid #ccc;
-	border-radius: .6rem;
+	border-top: .1rem solid #ccc;
+	border-bottom: .1rem solid #ccc;
 	.searchform-radio-group {
 		display: flex;
 		width: 100%;
@@ -72,13 +104,11 @@
 ***************************************************/
 .article {
 	margin: 0 0 2rem 0;
-	border: .1rem solid #f3f3f3;
 	.article-item {
 		position: relative;
 		margin: 0;
 		box-sizing: border-box;
 		background: #f3f3f3;
-		box-shadow: 0 2px 0 0 #ccc;
 		&:nth-child(odd) {
 			background: #fcfcfc;
 			&::after {
@@ -97,6 +127,9 @@
 			border-color: #f3f3f3 transparent transparent transparent;
 			content: '';
 			transform: translate(-50%,0);
+		}
+		&:last-child::after {
+			content: none;
 		}
 		a {
 			display: block;
