@@ -38,16 +38,11 @@ export function ajaxArticleRequest(articleId) {
 export function ajaxRequest({ searchType, searchValue, currentPageNum }) {
         return dispatch => {
 
-            console.log({ searchType, searchValue, currentPageNum });
-
             const aricleList = () => {
             return new Promise((resolve, reject) => {
 
-                let query = ''
-                if( searchValue && searchType ) {
-                    query = '?query=qiita+'+ searchType + '%3A' + searchValue;
-                }
-
+                let query = `?query=qiita+${searchType}%3A${searchValue}&page=${currentPageNum}`;
+                
                 let url = 'https://qiita.com/api/v2/items'+ query
                 request
                 .get(url)

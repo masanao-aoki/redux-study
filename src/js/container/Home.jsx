@@ -38,11 +38,16 @@ export class Home extends React.Component {
             searchType,
             searchValue,
             currentPageNum,
+            location: {pathname},
+            location: {query},
+            params,
             valueChange,
             typeChange,
             pageNumCange,
             queryChange
         } = this.props
+
+        console.log(this.props)
 
         return (
             <div>
@@ -69,7 +74,7 @@ export class Home extends React.Component {
                     </ul>
                     <input className='searchform-input' type="text" placeholder="記事タイトルから検索" value={searchValue} onChange={(e)=> valueChange(e.target.value)}/>
                     {(() => {
-                        if (searchValue)
+                        if (searchValue != query.value || searchType != params.type)
                             return <Link
                             to={{ pathname: '/search/' + searchType, query: { value: searchValue } }}
                             className='searchform-submit'
@@ -94,6 +99,7 @@ export class Home extends React.Component {
                     currentPageNum={currentPageNum}
                     pageNumCange={pageNumCange}
                     queryChange={queryChange}
+                    pathname={pathname}
                 />
             </div>
         )

@@ -12,10 +12,11 @@ export default class Pager extends React.Component {
             searchType,
             searchValue,
             currentPageNum,
-            queryChange
+            queryChange,
+            pathname
         } = this.props
 
-
+        console.log(pathname);
 
 
 
@@ -31,7 +32,7 @@ export default class Pager extends React.Component {
             <li>
                 <Link
                     to={{
-                        pathname: window.location.hash.split('?')[0].substr(1),
+                        pathname: pathname,
                         query: prev
                     }}
                     onClick={()=> queryChange({
@@ -51,7 +52,7 @@ export default class Pager extends React.Component {
                 <li>
                     <Link
                         to={{
-                            pathname: window.location.hash.split('?')[0].substr(1),
+                            pathname: pathname,
                             query: next
                         }}
                         onClick={
