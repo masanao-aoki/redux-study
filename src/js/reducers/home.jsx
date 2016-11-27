@@ -2,9 +2,9 @@
 
 const initialState = {
     content: [],
+    searchType: 'tag',
     searchValue: '',
     currentPageNum: 1,
-    selectSearchTypeValue: 'tag',
     selectSearchType: [
         {
             type: 'tag',
@@ -36,7 +36,7 @@ export default function home(state = initialState, action) {
             }
         case 'RADIO': {
             return Object.assign({}, state, {
-                selectSearchTypeValue: action.mode,
+                searchType: action.mode,
                 })
             }
         default:

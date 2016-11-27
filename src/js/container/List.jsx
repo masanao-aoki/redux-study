@@ -1,29 +1,11 @@
 'use strict';
 
 import React from 'react'
-import { connect } from 'react-redux'
-import { ajaxRequest,chengePageNum } from '../action/action'
 import moment from 'moment'
 import classNames from 'classnames'
 import {Link} from 'react-router'
 
-export class List extends React.Component {
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.searchValue != this.props.searchValue || nextProps.selectSearchTypeValue != this.props.selectSearchTypeValue){
-            this.props.ajaxRequest(nextProps.searchValue,nextProps.selectSearchTypeValue);
-            this.props.handlePageNum(1);
-        }
-    }
-
-
-    componentDidMount(){
-        if(this.props.searchValue && this.props.selectSearchTypeValue) {
-            this.props.ajaxRequest(this.props.searchValue, this.props.selectSearchTypeValue);
-        } else {
-            this.props.ajaxRequest();
-        }
-    }
+export default class List extends React.Component {
 
     render() {
         return (
@@ -53,20 +35,3 @@ export class List extends React.Component {
         )
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        content: state.home.content,
-
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        ajaxRequest: (searchVlue, selectType) => { dispatch(ajaxRequest(searchVlue, selectType)) },
-        handlePageNum: (pageNum) => { dispatch(chengePageNum(pageNum)) },
-        init: () => { dispatch(ajaxRequest()) }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(List)

@@ -1,6 +1,7 @@
 'use strict';
 
 import request from 'superagent'
+import qs from 'qs'
 
 export function ajaxArticleRequest(articleId) {
         return dispatch => {
@@ -34,8 +35,11 @@ export function ajaxArticleRequest(articleId) {
     };
 }
 
-export function ajaxRequest(searchValue,searchType) {
+export function ajaxRequest({ searchType, searchValue, currentPageNum }) {
         return dispatch => {
+
+            console.log({ searchType, searchValue, currentPageNum });
+
             const aricleList = () => {
             return new Promise((resolve, reject) => {
 
@@ -77,7 +81,7 @@ export function returnArticleRequest(data) {
     }
 }
 
-export function chengePageNum(num) {
+export function pageNumChange(num) {
     return {
         type: 'PAGE',
         num: Number(num)
@@ -91,14 +95,14 @@ export function returnRequest(data) {
     }
 }
 
-export function chengeSearchType(type) {
+export function typeChange(type) {
     return {
         type: 'RADIO',
         mode: type
     }
 }
 
-export function changeSearchValue(value) {
+export function valueChange(value) {
     return {
         type: 'CHANGEVALUE',
         text: value
