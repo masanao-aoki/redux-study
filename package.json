@@ -15,11 +15,12 @@
 		"precss": "1.4.0",
 		"postcss-loader": "1.2.1",
 		"style-loader": "0.13.1",
-		"css-loader": "0.26.1"
-	},
-	"devDependencies": {
+		"css-loader": "0.26.1",
 		"express": "4.14.0",
 		"request": "2.79.0",
+		"qs": "6.3.0"
+	},
+	"devDependencies": {
 		"gulp-nodemon": "2.2.1",
 		"gulp": "3.9.1",
 		"webpack-stream": "3.2.0",
@@ -41,7 +42,6 @@
 		"superagent": "2.3.0",
 		"classnames": "2.2.5",
 		"moment": "2.16.0",
-		"qs": "6.3.0",
 		"lodash": "4.17.2"
 	},
 	"engines": {
