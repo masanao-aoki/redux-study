@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 
 //setting
 var webpackConfig = require('../webpack.config');

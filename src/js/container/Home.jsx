@@ -1,109 +1,39 @@
 'use strict';
 
 import React from 'react'
+import { ReactDOM } from 'react-dom'
 import { connect } from 'react-redux'
-import { ajaxRequest, valueChange, typeChange, pageNumChange } from '../action/action'
 import moment from 'moment'
 import classNames from 'classnames'
 import {Link} from 'react-router'
+import _ from 'lodash'
+import SearchBox from './SearchBox'
 import List from './List'
 import Pager from './Pager'
+import { ajaxRequest, valueChange, typeChange, pageNumChange, scrollTop } from '../action/action'
 
+import {SEARCH_TYPE} from '../constants/searchType'
 
 export class Home extends React.Component {
+	componentDidMount() {
+	}
 
-
-    componentDidMount(){
-        const {
-            searchType,
-            searchValue,
-            currentPageNum,
-            queryChange,
-            params,
-            location: {query}
-        } = this.props
-
-        console.log(query.page || currentPageNum);
-
-        queryChange({
-            searchType: params.type || searchType,
-            searchValue: query.value || searchValue,
-            currentPageNum: query.page || currentPageNum
-        })
-
-    }
-
-    render() {
-        const {
-            searchType,
-            searchValue,
-            currentPageNum,
-            location: {pathname},
-            location: {query},
-            params,
-            valueChange,
-            typeChange,
-            pageNumCange,
-            queryChange
-        } = this.props
-
-        console.log(this.props)
-
-        return (
-            <div>
-                <div className="searchform">
-                    <ul className="searchform-radio-group">
-                        {this.props.selectSearchType.map(({type,label}) => {
-                            const radioGroupItemClass = classNames(
-                                'searchform-radio-group-item',
-                                { 'searchform-radio-group-item-active': searchType === type }
-                            );
-                            return (
-                                <li className={radioGroupItemClass} key={type}>
-                                    <input type="radio"
-                                        id={type}
-                                        name="type"
-                                        value={type}
-                                        onChange={(e)=> typeChange(e.target.value)}
-                                        checked={searchType === type}
-                                    />
-                                    <label htmlFor={type}>{label}</label>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                    <input className='searchform-input' type="text" placeholder="記事タイトルから検索" value={searchValue} onChange={(e)=> valueChange(e.target.value)}/>
-                    {(() => {
-                        if (searchValue != query.value || searchType != params.type)
-                            return <Link
-                            to={{ pathname: '/search/' + searchType, query: { value: searchValue } }}
-                            className='searchform-submit'
-                            onClick={()=> queryChange({
-                                searchType,
-                                searchValue,
-                                currentPageNum: 1
-                            })}
-                            >
-                            </Link>;
-                        else
-                        return <span className='searchform-submit'></span>;
-                    })()}
-                </div>
-                <List
-                    content={this.props.content}
-                />
-
-                <Pager
-                    searchType={searchType}
-                    searchValue={searchValue}
-                    currentPageNum={currentPageNum}
-                    pageNumCange={pageNumCange}
-                    queryChange={queryChange}
-                    pathname={pathname}
-                />
-            </div>
-        )
-    }
+	render() {
+		const {
+			searchValue,
+			currentPageNum,
+		} = this.props
+		return (
+			<div>
+				<SearchBox
+					{...{
+						searchValue,
+						currentPageNum
+					}}
+				/>
+			</div>
+		)
+	}
 }
 
 function mapStateToProps(state) {
@@ -111,17 +41,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        valueChange: (searchVlue) => { dispatch(valueChange(searchVlue)) },
-        typeChange: (searchType) => { dispatch(typeChange(searchType)) },
-        pageNumCange: (pageNum) => { dispatch(pageNumChange(pageNum)) },
-        queryChange: (querys) => {
-            dispatch(ajaxRequest(querys)),
-            dispatch(valueChange(querys.searchValue)),
-            dispatch(typeChange(querys.searchType)),
-            dispatch(pageNumChange(querys.currentPageNum))
-        }
-    }
+	return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

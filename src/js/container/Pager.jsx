@@ -4,43 +4,32 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import {Link} from 'react-router'
+import { scrollTop } from '../action/action'
 
 export default class Pager extends React.Component {
 
     render() {
         const {
-            searchType,
             searchValue,
-            currentPageNum,
-            queryChange,
-            pathname
+            currentPageNum
         } = this.props
 
-        console.log(pathname);
-
-
-
-        const next = { page: currentPageNum+1 }
-        const prev = { page: currentPageNum-1 }
+        const next = { page: parseInt(currentPageNum)+1 }
+        const prev = { page: parseInt(currentPageNum)-1 }
 
         if(searchValue) {
-            next.value = searchValue;
-            prev.value = searchValue;
+            next.q = searchValue;
+            prev.q = searchValue;
         }
 
         const pagerComponent = currentPageNum > 1 ? (
             <li>
                 <Link
                     to={{
-                        pathname: pathname,
+                        pathname: 'search/',
                         query: prev
                     }}
-                    onClick={()=> queryChange({
-                            searchType,
-                            searchValue,
-                            currentPageNum: prev.page
-                        })
-                    }
+                    onClick={ () => scrollTop() }
                 >
                     PREV
                 </Link>
@@ -52,16 +41,10 @@ export default class Pager extends React.Component {
                 <li>
                     <Link
                         to={{
-                            pathname: pathname,
+                            pathname: 'search/',
                             query: next
                         }}
-                        onClick={
-                            ()=> queryChange({
-                                searchType,
-                                searchValue,
-                                currentPageNum: next.page
-                            })
-                        }
+                        onClick={ () => scrollTop() }
                     >
                         NEXT
                     </Link>

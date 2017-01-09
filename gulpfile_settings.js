@@ -13,7 +13,7 @@ var settings = {
 	watch: {
 		name: watch,
 		html: {dir: watch + '/'},
-		css: {dir: watch + '/css/'},
+		css: {dir: watch + '/css/base.css'},
 		img: {dir: watch + '/images/'},
 		js: {dir: watch + '/js/'},
 		font: {dir: watch + '/font/'},

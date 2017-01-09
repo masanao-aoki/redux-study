@@ -2,41 +2,25 @@
 
 const initialState = {
     content: [],
-    searchType: 'tag',
     searchValue: '',
-    currentPageNum: 1,
-    selectSearchType: [
-        {
-            type: 'tag',
-            label: 'タグで探す'
-        },
-        {
-            type: 'title',
-            label: 'タイトルで探す'
-        }
-    ]
+    currentPageNum: 1
 }
 
 export default function home(state = initialState, action) {
     switch(action.type) {
-        case 'CHANGEVALUE': {
+        case 'CHANGE_SEARCH_VALUE': {
             return Object.assign({}, state, {
-                searchValue: action.text,
+                searchValue: action.searchValue
                 })
             }
-        case 'AJAX': {
+        case 'SUCCESS_AJAX_REQUESR': {
             return Object.assign({}, state, {
-                content: action.text,
+                content: action.result,
                 })
             }
-        case 'PAGE': {
+        case 'CHANGE_PAGE_NUM': {
             return Object.assign({}, state, {
-                currentPageNum: action.num,
-                })
-            }
-        case 'RADIO': {
-            return Object.assign({}, state, {
-                searchType: action.mode,
+                currentPageNum: action.currentPageNum,
                 })
             }
         default:

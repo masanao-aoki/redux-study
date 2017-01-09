@@ -4,6 +4,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ajaxArticleRequest, returnArticleRequest } from '../action/action'
 
+import styles from '../../css/module.css'
+
 
 export class Article extends React.Component {
 

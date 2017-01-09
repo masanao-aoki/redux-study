@@ -13,10 +13,9 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import * as reducers from './reducers'
 
-
-
 import App from './container/App'
 import Home from './container/Home'
+import Search from './container/Search'
 import Article from './container/Article'
 
 const reducer = combineReducers({
@@ -43,7 +42,7 @@ render(
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={Home}/>
-                <Route path="search/:type" component={Home}/>
+                <Route path="search/" component={Search}/>
                 <Route path="article/:id" component={Article}/>
             </Route>
         </Router>

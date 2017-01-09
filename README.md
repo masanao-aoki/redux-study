@@ -8,3 +8,6 @@
 
 ### react-router-redux 参考URL
 * https://github.com/reactjs/react-router-redux/tree/master/examples/basic
+
+### metaを動的に変更
+* https://www.npmjs.com/package/react-document-meta

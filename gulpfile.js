@@ -51,4 +51,4 @@ gulp.task('livereload', function() {
     );
 });
 
-gulp.task('default', ['watch', 'webserver', 'livereload']);
+gulp.task('default', ['watch']);

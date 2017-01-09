@@ -3,103 +3,107 @@
 import request from 'superagent'
 import qs from 'qs'
 
-export function ajaxArticleRequest(articleId) {
-        return dispatch => {
-            const aricleDetail = () => {
-            return new Promise((resolve, reject) => {
+export function fetchArticle(articleId) {
+	return dispatch => {
+		const aricleDetail = () => {
+			return new Promise((resolve, reject) => {
+				let url = 'http://qiita.com/api/v2/items/' + articleId
+				request
+					.get(url)
+					.withCredentials()
+					.end((err, res) => {
+						if (res.body) {
+							resolve(res.body);
+						} else {
+							reject('nnnn');
+						}
+					});
 
-                // console.log(articleId)
-                let url = 'http://qiita.com/api/v2/items/'+ articleId
-                // console.log(url)
-                request
-                .get(url)
-                .withCredentials()
-                .end((err, res) => {
-                    if( res.body ) {
-                        resolve(res.body);
-                    } else {
-                        reject('nnnn');
-                    }
-                });
+			});
+		};
 
-            });
-        };
+		const aricleDetails = aricleDetail();
+		aricleDetails.then((result) => {
+			dispatch(returnArticleRequest(result));
+		}).catch(function (reason) {
+			// console.log('ok');
+		});
 
-        const aricleDetails = aricleDetail();
-        aricleDetails.then((result) => {
-            dispatch(returnArticleRequest(result));
-        }).catch(function(reason) {
-            // console.log('ok');
-        });
-
-    };
+	};
 }
 
-export function ajaxRequest({ searchType, searchValue, currentPageNum }) {
-        return dispatch => {
+export function fetchList({querys}) {
+	return dispatch => {
 
-            const aricleList = () => {
-            return new Promise((resolve, reject) => {
+		let queryArray = {
+			query: `qiita+title:${querys.q}`,
+			page: querys.page
+		}
 
-                let query = `?query=qiita+${searchType}%3A${searchValue}&page=${currentPageNum}`;
-                
-                let url = 'https://qiita.com/api/v2/items'+ query
-                request
-                .get(url)
-                .withCredentials()
-                .end((err, res) => {
-                    if( res.body.length ) {
-                        resolve(res.body);
-                    } else {
-                        reject('nnnn');
-                    }
-                });
+		const aricleList = () => {
+			return new Promise((resolve, reject) => {
 
-            });
-        };
+				let query = qs.stringify(queryArray);
+				let url = '/api/?' + decodeURIComponent(query);
+				
+				request
+					.get(url)
+					.withCredentials()
+					.end((err, res) => {
+						if (res.body.length) {
+							resolve(res.body);
+						} else {
+							reject('nnnn');
+						}
+					});
 
-        const aricleLists = aricleList();
-        aricleLists.then((result) => {
-            dispatch(returnRequest(result));
-        }).catch(function(reason) {
-            // console.log('ok');
-        });
+			});
+		};
 
-    };
+		const aricleLists = aricleList();
+		aricleLists.then((result) => {
+			dispatch(returnRequest(result));
+		}).catch(function (reason) {
+			// console.log('ok');
+		});
+
+	};
 }
 
-export function returnArticleRequest(data) {
-    // console.log(data)
-    return {
-        type: 'DETAIL',
-        text: data
-    }
+export function scrollTop() {
+	window.scrollTo(0, 0);
 }
 
-export function pageNumChange(num) {
-    return {
-        type: 'PAGE',
-        num: Number(num)
-    }
+
+export const SUCCESS_ARTICLE_REQUESR = 'SUCCESS_ARTICLE_REQUESR'
+export function returnArticleRequest(result) {
+	// console.log(data)
+	return {
+		type: SUCCESS_ARTICLE_REQUESR,
+		result
+	}
 }
 
-export function returnRequest(data) {
-    return {
-        type: 'AJAX',
-        text: data
-    }
+export const CHANGE_PAGE_NUM = 'CHANGE_PAGE_NUM'
+export function pageNumChange(currentPageNum) {
+	return {
+		type: CHANGE_PAGE_NUM,
+		currentPageNum: parseInt(currentPageNum)
+	}
 }
 
-export function typeChange(type) {
-    return {
-        type: 'RADIO',
-        mode: type
-    }
+const SUCCESS_AJAX_REQUESR = 'SUCCESS_AJAX_REQUESR'
+export function returnRequest(result) {
+	return {
+		type: SUCCESS_AJAX_REQUESR,
+		result
+	}
 }
 
-export function valueChange(value) {
-    return {
-        type: 'CHANGEVALUE',
-        text: value
-    }
+export const CHANGE_SEARCH_VALUE = 'CHANGE_SEARCH_VALUE'
+export function valueChange(searchValue) {
+	return {
+		type: CHANGE_SEARCH_VALUE,
+		searchValue
+	}
 }
