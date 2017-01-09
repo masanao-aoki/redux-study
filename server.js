@@ -5,8 +5,9 @@ var qs = require('qs');
 
 app.use(express.static('root'));
 
-const port = 8888;
-app.listen(port,function(){
+app.set('port', (process.env.PORT || 8000));
+
+app.listen(app.get('port'),function(){
 	console.log(`Expressサーバー（localhost:${port}）を起動しました。`);
 });
 
