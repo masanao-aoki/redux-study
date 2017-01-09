@@ -3,12 +3,12 @@ var app = express();
 var request = require('request');
 var qs = require('qs');
 
-app.use(express.static('root'));
+app.use(express.static(__dirname + '/root'));
 
 app.set('port', (process.env.PORT || 8000));
 
 app.listen(app.get('port'),function(){
-	console.log(`Expressサーバー（localhost:${port}）を起動しました。`);
+	console.log(`Expressサーバーを起動しました。`);
 });
 
 app.get('/api/',function(req,res){
