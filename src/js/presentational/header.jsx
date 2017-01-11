@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classNames from 'classnames'
-import styles from '../../css/header.css'
+import styles from '../../css/components/header.css'
 
 
 export default class Header extends React.Component {

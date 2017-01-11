@@ -3,7 +3,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import {SEARCH_TYPE} from '../constants/searchType'
-import styles from '../../css/searchbox.css'
+import styles from '../../css/components/searchbox.css'
 
 export default class List extends React.Component {
 
@@ -26,7 +26,7 @@ export default class List extends React.Component {
 			searchValue: e
 		})
 	}
-	
+
 	render() {
 		return (
 			<div className={styles.searchform}>

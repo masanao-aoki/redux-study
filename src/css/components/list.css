@@ -50,7 +50,7 @@
 			.article-item-tag-group {
 				li {
 					display: inline-block;
-					margin: 0 .5rem;
+					margin: 0 .5rem .5rem;
 					padding: .8rem;
 					border-radius: .4rem;
 					background: #e91e63;
@@ -61,6 +61,16 @@
 					}
 				}
 			}
+		}
+		.article-item-user {
+			text-align: center;
+			color: #666;
+		}
+		.article-item-time {
+			display: block;
+			margin: 1rem 0;
+			text-align: center;
+			color: #666;
 		}
 	}
 }
