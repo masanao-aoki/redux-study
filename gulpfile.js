@@ -1,5 +1,5 @@
 var requireDir = require('require-dir');
-var dir        = requireDir('./tasks', {recurse: true});
+var dir = requireDir('./tasks', {recurse: true});
 
 var gulp = require('gulp');
 var watch = require('gulp-watch');
@@ -34,15 +34,8 @@ gulp.task('watch', ['html', 'webpack', 'css', 'img', 'font'], function(){
     );
 });
 
-gulp.task('webserver', function() {
-    connect.server(
-        {
-            root: settings.dest.name,
-            livereload: true,
-            port: 8888
-        }
-    );
+gulp.task('nodemon', ['server'], function(){
+    gulp.watch(['server']);
 });
 
-
-gulp.task('default', ['watch']);
+gulp.task('default', ['watch', 'nodemon']);
