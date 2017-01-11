@@ -13,7 +13,8 @@ var settings = {
 	watch: {
 		name: watch,
 		html: {dir: watch + '/'},
-		css: {dir: watch + '/css/base.css'},
+		cssBase: {dir: watch + '/css/base.css'},
+		css: {dir: watch + '/css/components/'},
 		img: {dir: watch + '/images/'},
 		js: {dir: watch + '/js/'},
 		font: {dir: watch + '/font/'},
@@ -26,6 +27,7 @@ settings.dest.js.files = settings.dest.js.dir + '**/*.js';
 
 settings.watch.html.files = settings.watch.html.dir + '**/*.html';
 settings.watch.css.files = settings.watch.css.dir + '**/*.css';
+settings.watch.cssBase.files = settings.watch.css.dir + '**/base.css';
 settings.watch.js.files =  settings.watch.js.dir + '**/*.js';
 settings.watch.es6.files =  settings.watch.es6.dir + '**/*.jsx';
 settings.watch.img.files =  settings.watch.img.dir + '**/**';

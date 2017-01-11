@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import {Link} from 'react-router'
 import { scrollTop } from '../action/action'
 
+import styles from '../../css/components/pager.css'
+
 export default class Pager extends React.Component {
 
     render() {
@@ -23,7 +25,7 @@ export default class Pager extends React.Component {
         }
 
         const pagerComponent = currentPageNum > 1 ? (
-            <li>
+			<li className={styles['pager-item-prev']}>
                 <Link
                     to={{
                         pathname: 'search/',
@@ -36,9 +38,9 @@ export default class Pager extends React.Component {
             </li>
         ) : null;
         return (
-            <ul>
+			<ul className={styles.pager}>
                 {pagerComponent}
-                <li>
+                <li className={styles['pager-item-next']}>
                     <Link
                         to={{
                             pathname: 'search/',

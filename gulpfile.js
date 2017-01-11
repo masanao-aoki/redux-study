@@ -3,7 +3,6 @@ var dir        = requireDir('./tasks', {recurse: true});
 
 var gulp = require('gulp');
 var watch = require('gulp-watch');
-var connect = require('gulp-connect');
 
 //setting
 var settings = require('./gulpfile_settings');
@@ -14,13 +13,14 @@ gulp.task('watch', ['html', 'webpack', 'css', 'img', 'font'], function(){
         ['html']
     );
     gulp.watch(
-        settings.watch.css.files,
+        settings.watch.cssBase.dir,
         ['css']
     );
     gulp.watch(
         [
-            settings.watch.js.files,
-            settings.watch.es6.files
+		settings.watch.js.files,
+		settings.watch.es6.files,
+        settings.watch.css.files
         ],
         ['webpack']
     );
@@ -44,11 +44,5 @@ gulp.task('webserver', function() {
     );
 });
 
-gulp.task('livereload', function() {
-    gulp.src(settings.dest.name + '/**/*.*')
-        .pipe(watch(settings.dest.name + '/**/*.*'))
-        .pipe(connect.reload()
-    );
-});
 
 gulp.task('default', ['watch']);

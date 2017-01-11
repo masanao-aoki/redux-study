@@ -7,7 +7,7 @@ import Header from '../presentational/header'
 import Footer from '../presentational/footer'
 import { ajaxRequest, valueChange, typeChange, pageNumChange, scrollTop } from '../action/action'
 
-import layout from '../../css/layout.css'
+import layout from '../../css/components/layout.css'
 
 export class App extends React.Component {
 

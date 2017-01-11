@@ -8,7 +8,7 @@ var settings = require('../gulpfile_settings');
 
 gulp.task('css', function () {
     return gulp.src(
-        [ settings.watch.css.files ]
+        [ settings.watch.cssBase.dir ]
     )
     .pipe(plumber())
     .pipe(
