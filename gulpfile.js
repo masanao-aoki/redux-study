@@ -1,6 +1,5 @@
 var requireDir = require('require-dir');
 var dir = requireDir('./tasks', { recurse: true });
-var connect = require('gulp-connect')
 
 var gulp = require('gulp');
 var watch = require('gulp-watch');
@@ -35,16 +34,8 @@ gulp.task('watch', ['html', 'webpack', 'css', 'img', 'font'], function(){
     );
 });
 
-gulp.task('livereload', function() {
-    gulp.src(settings.dest.name + '/**/*.*')
-        .pipe(watch(settings.dest.name + '/**/*.*'))
-        .pipe(connect.reload()
-    );
-});
-
-
 gulp.task('nodemon', ['server'], function(){
     gulp.watch(['server']);
 });
 
-gulp.task('default', ['watch', 'nodemon','livereload']);
+gulp.task('default', ['watch', 'nodemon']);
